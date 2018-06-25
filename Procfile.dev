@@ -1,0 +1,2 @@
+server: .\node_modules\.bin\nodemon main.js
+webpack: npm run dev
