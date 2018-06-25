@@ -11,6 +11,7 @@ var cors = require('cors');
 var ejs = require('ejs');
 var http = require('http');
 var socketIO = require('socket.io');
+const log = require('simple-node-logger').createSimpleLogger('project.log');
 
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -32,6 +33,20 @@ var upload = multer({
 //.array("files", 3);
 
 app.use(morgan('dev'));
+
+app.use(function (req, res, next) {
+    var loginfo = req.method + "   " + req.originalUrl;
+    function afterResponse() {
+        res.removeListener('finish', afterResponse);
+        res.removeListener('close', afterResponse);    
+        loginfo += "   " + res.statusCode    
+        log.info(loginfo);
+    }
+    res.on('finish', afterResponse);
+    res.on('close', afterResponse);
+    
+    next();
+})
 
 app.use(function (req, res, next) {
     req.io = io;
@@ -77,8 +92,8 @@ app.use(cookieSession({
 app.use(express.static('Images'));
 app.use('/uploads', express.static(__dirname + './uploads'));
 
-//var port = process.env.PORT || 8055; // set our port
-var port = process.env.PORT || 3000; // set our port
+var port = process.env.PORT || 8055; // set our port
+//var port = process.env.PORT || 80; // set our port
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(bodyParser.urlencoded({extended: false}));
