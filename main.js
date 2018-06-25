@@ -78,7 +78,7 @@ app.use(express.static('Images'));
 app.use('/uploads', express.static(__dirname + './uploads'));
 
 //var port = process.env.PORT || 8055; // set our port
-var port = process.env.PORT || 80; // set our port
+var port = process.env.PORT || 3000; // set our port
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 app.use(bodyParser.urlencoded({extended: false}));
