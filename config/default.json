@@ -4,8 +4,8 @@
   "upload_url": "http://localhost:5000/uploads/",
   "public_url": "http://localhost:5000/",
   "cloudinary": {
-    "cloud_name": "manishzxc",
-    "api_key" : "563835315883936",
-    "api_secret": "3RqahKbGb596i3ZE31zWZZMqlog"
+    "cloud_name": "your_cloud_name",
+    "api_key" : "your_api_key",
+    "api_secret": "your_api_secret"
   }  
 }
